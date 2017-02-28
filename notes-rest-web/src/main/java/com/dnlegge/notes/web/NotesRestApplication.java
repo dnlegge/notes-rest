@@ -1,5 +1,6 @@
 package com.dnlegge.notes.web;
 
+import com.dnlegge.notes.web.rest.converter.LocalDateTimeJsonSerialiser;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -18,6 +19,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -73,6 +75,8 @@ public class NotesRestApplication extends SpringBootServletInitializer {
     @Autowired
     public void configJackson(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
         jackson2ObjectMapperBuilder.serializationInclusion(JsonInclude.Include.NON_NULL);
+        jackson2ObjectMapperBuilder.serializerByType(LocalDateTime.class, new LocalDateTimeJsonSerialiser());
+
     }
 
     @Bean
