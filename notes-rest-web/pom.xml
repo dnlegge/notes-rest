@@ -18,6 +18,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.dnlegge.notes</groupId>
+            <artifactId>notes-rest-core</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
         </dependency>
