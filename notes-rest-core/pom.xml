@@ -56,6 +56,16 @@
             <artifactId>jackson-core</artifactId>
             <version>2.7.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.dnlegge.notes</groupId>
+            <artifactId>notes-rest-api</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.2.5.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

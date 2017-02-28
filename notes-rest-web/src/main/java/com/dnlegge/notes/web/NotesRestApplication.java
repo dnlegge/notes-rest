@@ -27,7 +27,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
 @SpringBootApplication
 @ComponentScan(
-        "com.dnlegge.notes"
+        "com.dnlegge.notes.web, " +
+                "com.dnlegge.notes.core"
 )
 public class NotesRestApplication extends SpringBootServletInitializer {
 
