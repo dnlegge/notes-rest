@@ -108,6 +108,11 @@
             <artifactId>spring-web</artifactId>
             <version>4.3.4.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.dnlegge.notes</groupId>
+            <artifactId>notes-rest-api</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,7 +1,6 @@
 package com.dnlegge.notes.web.rest.controller;
 
 
-import com.dnlegge.notes.domain.Note;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -12,18 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "rest/",
-        produces = MediaType.APPLICATION_JSON_VALUE)
-public class NotesRestController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NotesRestController.class);
+public class HomeRestController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeRestController.class);
 
-    @RequestMapping(value = "note",
+    public String index() {
+        return "index";
+    }
+
+    public String home() {
+        return "home";
+    }
+
+    @RequestMapping(value = "rest",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Note run() {
+    public String run() {
 
-        return new Note("OK");
+        return "OK";
 
     }
 }
