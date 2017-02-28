@@ -24,7 +24,6 @@ public class NotesRestController {
     @Autowired
     private NotesManager notesManager;
 
-
     @RequestMapping(value = "note",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
