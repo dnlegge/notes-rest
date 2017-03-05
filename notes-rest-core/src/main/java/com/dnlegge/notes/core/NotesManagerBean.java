@@ -30,14 +30,22 @@ public class NotesManagerBean implements NotesManager {
     }
 
     // I am useing this for testing, so perhaps it should just be a lower scoped method (not on interface)
-    @Override
-    public boolean containsNoteCreatedAt(LocalDateTime localDateTime) {
+//    @Override
+    boolean containsNoteCreatedAt(LocalDateTime localDateTime) {
         return notes.containsKey(localDateTime);
     }
 
-    @Override
-    public Note getNoteCreatedAt(LocalDateTime creationDateTime) {
+    //    @Override
+    Note getNoteCreatedAt(LocalDateTime creationDateTime) {
         return notes.get(creationDateTime);
+    }
+
+    int getNumberOfNotes() {
+        return notes.size();
+    }
+
+    void clear() {
+        notes.clear();
     }
 
 }

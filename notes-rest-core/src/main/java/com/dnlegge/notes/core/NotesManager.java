@@ -2,7 +2,6 @@ package com.dnlegge.notes.core;
 
 import com.dnlegge.notes.domain.Note;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 public interface NotesManager {
@@ -11,8 +10,9 @@ public interface NotesManager {
 
     Note add(Note note);
 
-    boolean containsNoteCreatedAt(LocalDateTime note);
+//    boolean containsNoteCreatedAt(LocalDateTime note);
 
-    Note getNoteCreatedAt(LocalDateTime creationDateTime);
+//    Note getNoteCreatedAt(LocalDateTime creationDateTime);
+
 }
 
