@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 //@Service
@@ -16,7 +16,7 @@ public class NotesManagerBean implements NotesManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotesManagerBean.class);
 
     //inelegant but saves notes in memory as per spec
-    private static Map<LocalDateTime, Note> notes = new ConcurrentHashMap<>();
+    private static Map<UUID, Note> notes = new ConcurrentHashMap<>();
 
     @Override
     public Collection<Note> getAll() {
@@ -25,19 +25,18 @@ public class NotesManagerBean implements NotesManager {
 
     @Override
     public Note add(Note note) {
-        notes.put(note.getCreationDateTime(), note);
+        notes.put(note.getUuid(), note);
         return note;
     }
 
     // I am useing this for testing, so perhaps it should just be a lower scoped method (not on interface)
-//    @Override
-    boolean containsNoteCreatedAt(LocalDateTime localDateTime) {
-        return notes.containsKey(localDateTime);
+    boolean containsNote(UUID uuid) {
+        return notes.containsKey(uuid);
     }
 
     //    @Override
-    Note getNoteCreatedAt(LocalDateTime creationDateTime) {
-        return notes.get(creationDateTime);
+    Note getNote(UUID uuid) {
+        return notes.get(uuid);
     }
 
     int getNumberOfNotes() {

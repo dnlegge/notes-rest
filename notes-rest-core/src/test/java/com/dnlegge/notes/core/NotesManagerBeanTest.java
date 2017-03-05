@@ -5,8 +5,8 @@ import com.dnlegge.notes.domain.Note;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +39,7 @@ public class NotesManagerBeanTest {
 
     }
 
-    private LocalDateTime addNote(String noteText) {
+    private UUID addNote(String noteText) {
 
         Note hello = new Note(noteText);
 
@@ -49,11 +49,11 @@ public class NotesManagerBeanTest {
 
 //        assertEquals(size + 1, beingTested.getNumberOfNotes());
 
-        assertTrue(beingTested.containsNoteCreatedAt(hello.getCreationDateTime()));
+        assertTrue(beingTested.containsNote(hello.getUuid()));
 
-        assertEquals(noteText, beingTested.getNoteCreatedAt(hello.getCreationDateTime()).getNoteTextContent());
+        assertEquals(noteText, beingTested.getNote(hello.getUuid()).getNoteTextContent());
 
-        return hello.getCreationDateTime();
+        return hello.getUuid();
     }
 
     @Test
@@ -72,18 +72,18 @@ public class NotesManagerBeanTest {
     @Test
     public void addMultipleCheckVeracityAndClear() throws Exception {
 
-        LocalDateTime hello = addNote("hello");
+        UUID helloUuid = addNote("hello");
 
         assertEquals(1, beingTested.getNumberOfNotes());
 
-        LocalDateTime helloAgain = addNote("hello again");
+        UUID helloAgainUuid = addNote("hello again");
 
         assertEquals(2, beingTested.getNumberOfNotes());
 
-        assertEquals(hello, beingTested.getNoteCreatedAt(hello).getCreationDateTime());
-        assertEquals("hello", beingTested.getNoteCreatedAt(hello).getNoteTextContent());
-        assertEquals(helloAgain, beingTested.getNoteCreatedAt(helloAgain).getCreationDateTime());
-        assertEquals("hello again", beingTested.getNoteCreatedAt(helloAgain).getNoteTextContent());
+        assertEquals(helloUuid, beingTested.getNote(helloUuid).getUuid());
+        assertEquals("hello", beingTested.getNote(helloUuid).getNoteTextContent());
+        assertEquals(helloAgainUuid, beingTested.getNote(helloAgainUuid).getUuid());
+        assertEquals("hello again", beingTested.getNote(helloAgainUuid).getNoteTextContent());
 
         beingTested.clear();
 
