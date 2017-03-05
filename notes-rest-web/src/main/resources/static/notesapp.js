@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    addDefaultNote();
+    // addDefaultNote();
     getNotes();
 
 });
