@@ -7,12 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.UUID;
 
 
 @RestController
@@ -44,5 +43,31 @@ public class NotesRestController {
 
     }
 
+    @RequestMapping(value = "addDefaultNote",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String addDefaultNote() {
+
+        Note note = new Note("Note added on application start/load at " + LocalDateTime.now());
+        notesManager.add(note);
+
+        return note.getNoteTextContent();
+    }
+
+    @RequestMapping(value = "add",
+            method = RequestMethod.POST//,
+//            consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE
+
+    )
+    @ResponseBody
+    public UUID addNote(@RequestBody String content) {
+
+        Note note = new Note(content);
+        notesManager.add(note);
+
+        return note.getUuid();
+    }
 
 }
