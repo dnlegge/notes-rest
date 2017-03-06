@@ -29,6 +29,25 @@ public class NotesManagerBean implements NotesManager {
         return note;
     }
 
+    @Override
+    public UUID update(Note note) {
+        if (notes.containsKey(note.getUuid())) {
+            notes.replace(note.getUuid(), note);
+        } else {
+            notes.put(note.getUuid(), note);
+        }
+        return note.getUuid();
+    }
+
+    @Override
+    public boolean delete(UUID uuid) {
+        if (notes.containsKey(uuid)) {
+            notes.remove(uuid);
+            return true;
+        }
+        return false;
+    }
+
     // I am useing this for testing, so perhaps it should just be a lower scoped method (not on interface)
     boolean containsNote(UUID uuid) {
         return notes.containsKey(uuid);

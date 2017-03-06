@@ -61,6 +61,7 @@ public class NotesRestController {
 //            produces = MediaType.APPLICATION_JSON_VALUE
 
     )
+
     @ResponseBody
     public UUID addNote(@RequestBody String content) {
 
@@ -68,6 +69,40 @@ public class NotesRestController {
         notesManager.add(note);
 
         return note.getUuid();
+    }
+
+    @RequestMapping(value = "add",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public UUID editNote(@RequestBody Note note) {
+
+        return notesManager.update(note);
+
+    }
+
+    @RequestMapping(value = "",
+            method = RequestMethod.DELETE,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public boolean deleteNote(@RequestBody Note note) {
+
+        return notesManager.delete(note.getUuid());
+
+    }
+
+    @RequestMapping(value = "id/{uuid}",
+            method = RequestMethod.DELETE
+    )
+    @ResponseBody
+    public boolean deleteNote(@PathVariable UUID uuid) {
+
+        return notesManager.delete(uuid);
+
     }
 
 }

@@ -3,6 +3,7 @@ package com.dnlegge.notes.core;
 import com.dnlegge.notes.domain.Note;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public interface NotesManager {
 
@@ -10,9 +11,9 @@ public interface NotesManager {
 
     Note add(Note note);
 
-//    boolean containsNoteCreatedAt(LocalDateTime note);
+    UUID update(Note note);
 
-//    Note getNoteCreatedAt(LocalDateTime creationDateTime);
+    boolean delete(UUID uuid);
 
 }
 

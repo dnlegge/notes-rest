@@ -4,7 +4,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
     <title>Notes Web UI</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
     <script src="notesapp.js"></script>
 
     <style>
@@ -31,17 +31,12 @@
 <div id="buttons">
     Notes
     <button id="getButton" onclick="getNotes()">Get Notes</button>
-    <!--<button id="Button" onclick="javascript:getNotes()">Get Notes</button>-->
 
 </div>
 <div id="addNoteDiv">
     Add Note
-    <!--<form name="newNoteForm" id="newNoteForm" action="addNote(newNoteText)">-->
-    <!--<textarea id="newNoteText" name="newNoteText"></textarea>-->
     <input type="text" id="newNoteText" name="newNoteText">
     <button id="addButton" onclick="addNote()">Add Note</button>
-    <!--</form>-->
-    <!--<button id="Button" onclick="javascript:getNotes()">Get Notes</button>-->
     <div id="newNoteStatus"></div>
 
 </div>

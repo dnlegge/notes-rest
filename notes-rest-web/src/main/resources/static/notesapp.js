@@ -57,17 +57,39 @@ function addDefaultNote() {
 
         })
         .fail(function () {
-            // clearModelPanels();
             document.getElementById('notesListContent').innerHTML = "Failed to retrieve notes";
         })
     ;
 }
 
-function handleNoteList(data) {
+function deleteNote(uuid) {
+    document.getElementById('newNoteStatus').innerHTML = "";
+    document.getElementById('notesListContent').innerHTML = "Deleting note: " + uuid;
 
+    jqxhr = $.ajax({
+        url: "/notes/rest/id/" + uuid,
+        type: "DELETE"
+    })
+        .done(function (data) {
+            document.getElementById('notesListContent').innerHTML = "Note successfully deleted: " + uuid;
+            document.getElementById('newNoteStatus').innerHTML = "Note successfully deleted: " + uuid;
+            getNotes();
+
+        })
+        .fail(function () {
+            document.getElementById('notesListContent').innerHTML = "Failed to delete note " + uuid;
+        })
+    ;
+    // document.getElementById('notesListContent').innerHTML = "Note deleted: " + uuid;
+
+    getNotes();
+}
+
+function handleNoteList(data) {
 
     // if (data.httpStatus == '200 - OK' && data.result != null ) {
     var table = '<table ><tr>';
+    table += '<td>Delete</td>';
     table += '<td>UUID</td>';
     table += '<td>Creation Date Time</td>';
     table += '<td>Text</td>';
@@ -76,19 +98,17 @@ function handleNoteList(data) {
 
         table += '<tr>';
 
+        table += '<td><button id="deleteButton' + key + '" onclick="deleteNote(\'' + data[key].uuid + '\')">Delete</button></td>';
         table += '<td>' + data[key].uuid + '</td>';
         table += '<td>' + data[key].creationDateTime + '</td>';
         table += '<td>' + data[key].noteTextContent + '</td>';
+
         table += '</tr>';
 
     }
 
-    table += '</tr>';
+    table += '</table>';
 
     document.getElementById('notesListContent').innerHTML = table;
-    // }
-    // else {
-    //     document.getElementById('chart').innerHTML = "Status returned: " + jsonObj.httpStatus
-    //         + ". With message: " + jsonObj.error;
-    // }
+    // document.getElementById('newNoteStatus').innerHTML = "" ;
 }
