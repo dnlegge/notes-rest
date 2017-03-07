@@ -13,6 +13,8 @@ public interface NotesManager {
 
     UUID update(Note note);
 
+    UUID update(UUID uuid, String newText);
+
     boolean delete(UUID uuid);
 
 }

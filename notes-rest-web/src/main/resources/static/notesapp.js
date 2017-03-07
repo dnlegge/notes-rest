@@ -93,6 +93,8 @@ function handleNoteList(data) {
     table += '<td>UUID</td>';
     table += '<td>Creation Date Time</td>';
     table += '<td>Text</td>';
+    table += '<td>Edit</td>';
+    table += '<td></td>';
     table += '</tr>';
     for (var key in data) {
 
@@ -101,7 +103,17 @@ function handleNoteList(data) {
         table += '<td><button id="deleteButton' + key + '" onclick="deleteNote(\'' + data[key].uuid + '\')">Delete</button></td>';
         table += '<td>' + data[key].uuid + '</td>';
         table += '<td>' + data[key].creationDateTime + '</td>';
-        table += '<td>' + data[key].noteTextContent + '</td>';
+        table += '<td>';
+        // table += '<div id="textValue' + key + '" >' + data[key].noteTextContent + '</div>';
+        // table += '<div id="textValueEdit' + key + '" enabled="false">';
+        table += '<input type="text" id="editNoteText' + data[key].uuid + '" disabled="true" value=' + data[key].noteTextContent + '/>';
+        // table += '</div>';
+        table += '</td>';
+        table += '<td><button id="editButton' + key + '" onclick="editNote(\'' + data[key].uuid + '\')">Edit</button></td>';
+
+        table += '<div id="saveButtonDiv' + data[key].uuid + '" hidden="true">';
+        table += '<td><button id="saveButton' + data[key].uuid + '" onclick="saveNote(\'' + data[key].uuid + '\')" >Save</button></td>';
+        table += '</div>';
 
         table += '</tr>';
 
@@ -110,5 +122,34 @@ function handleNoteList(data) {
     table += '</table>';
 
     document.getElementById('notesListContent').innerHTML = table;
-    // document.getElementById('newNoteStatus').innerHTML = "" ;
+}
+
+function editNote(key) {
+    document.getElementById('editNoteText' + key).disabled = false;
+    document.getElementById('saveButtonDiv' + key).hidden = false;
+}
+
+function saveNote(uuid) {
+    var noteTextContent = document.getElementById('editNoteText' + uuid).value;
+    // note.noteTextContent = document.getElementById('editNoteText' + note.uuid);
+    // var uuid = note.uuid;
+
+    jqxhr = $.ajax({
+        url: "/notes/rest/edit/id/" + uuid,
+        type: "POST",
+        data: noteTextContent
+    })
+        .done(function (data) {
+            document.getElementById('notesListContent').innerHTML = "Note successfully edited: " + uuid;
+            document.getElementById('newNoteStatus').innerHTML = "Note successfully edited: " + uuid;
+            getNotes();
+
+        })
+        .fail(function () {
+            document.getElementById('notesListContent').innerHTML = "Failed to edit note " + uuid;
+        })
+    ;
+
+    getNotes();
+
 }

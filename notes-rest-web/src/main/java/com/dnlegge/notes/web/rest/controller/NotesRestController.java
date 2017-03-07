@@ -83,6 +83,36 @@ public class NotesRestController {
 
     }
 
+    @RequestMapping(value = "edit",
+            method = RequestMethod.POST
+            ,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+//            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public UUID addNote(
+            @RequestBody Note note) {
+
+        notesManager.update(note);
+
+        return note.getUuid();
+    }
+
+    @RequestMapping(value = "edit/id/{uuid}",
+            method = RequestMethod.POST
+//            ,
+//            consumes = MediaType.APPLICATION_JSON_VALUE
+//            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public UUID addNote(
+            @PathVariable UUID uuid,
+            @RequestBody String newText
+    ) {
+
+        return notesManager.update(uuid, newText);
+    }
+
     @RequestMapping(value = "",
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE,

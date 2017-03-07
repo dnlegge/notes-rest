@@ -40,6 +40,18 @@ public class NotesManagerBean implements NotesManager {
     }
 
     @Override
+    public UUID update(UUID uuid, String newText) {
+        if (notes.containsKey(uuid)) {
+            Note note = notes.get(uuid);
+            Note newNote = new Note(note.getUuid(), note.getCreationDateTime(), newText);
+            notes.replace(note.getUuid(), newNote);
+            return uuid;
+        }
+        //errror
+        return null;
+    }
+
+    @Override
     public boolean delete(UUID uuid) {
         if (notes.containsKey(uuid)) {
             notes.remove(uuid);
