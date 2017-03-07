@@ -15,7 +15,7 @@ There are three modules:
 
 To run:
 Either use a development environment, such as intellij and get that to it run for you.
-Or type from the root directory of the checkouted out code:
+Or type from the root directory of the check ed out code:
 'java -jar notes-rest-web/target/notes.jar'
 
 

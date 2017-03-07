@@ -47,8 +47,9 @@ public class NotesManagerBean implements NotesManager {
             notes.replace(note.getUuid(), newNote);
             return uuid;
         }
-        //errror
-        return null;
+//        errror?
+        throw new RuntimeException("No such note as " + uuid);
+//        return null;
     }
 
     @Override

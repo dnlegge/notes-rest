@@ -89,4 +89,74 @@ public class NotesManagerBeanTest {
 
     }
 
+    @Test
+    public void addAndEdit() throws Exception {
+
+        UUID uuid = addNote("hello");
+
+        UUID update = beingTested.update(uuid, "hello there");
+
+        assertEquals(uuid, update);
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        beingTested.clear();
+
+    }
+
+    @Test
+    public void addAndDelete() throws Exception {
+
+        UUID uuid = addNote("hello");
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        beingTested.delete(uuid);
+
+        assertEquals(0, beingTested.getNumberOfNotes());
+
+        beingTested.clear();
+
+    }
+
+    @Test
+    public void addAndDeleteNonExistent() throws Exception {
+
+        UUID uuid = addNote("hello");
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        assertFalse(beingTested.delete(UUID.randomUUID()));
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        beingTested.clear();
+
+    }
+
+    @Test
+    public void addAndUpdateNonExistent() throws Exception {
+
+        UUID uuid = addNote("hello");
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        UUID update = UUID.randomUUID();
+
+        try {
+
+            update = beingTested.update(update, "bye bye");
+
+            fail();
+
+        } catch (Exception e) {
+            assertEquals("No such note as " + update, e.getMessage());
+        }
+
+        assertEquals(1, beingTested.getNumberOfNotes());
+
+        beingTested.clear();
+
+    }
+
 }
